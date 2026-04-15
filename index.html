@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -108,21 +108,21 @@
         <!-- Subjects -->
         <div class="sec-head">
           <div class="sec-title">Minhas matérias</div>
-          <div class="sec-link">Ver todas</div>
+          <div class="sec-link" onclick="goTo('s-materias')">Ver todas</div>
         </div>
         <div class="subject-list">
-          <div class="subject-item">
+          <div class="subject-item" onclick="goTo('s-mat')">
             <div class="subj-color" style="background:#6f5ce8;"></div>
             <div class="subj-info">
               <div class="subj-name">Matemática</div>
               <div class="subj-meta">4 resumos · 1h 20min hoje</div>
             </div>
             <div class="subj-progress-wrap">
-              <div class="subj-bar-bg"><div class="subj-bar-fill" style="width:80%;background:#6f5ce8;"></div></div>
-              <div class="subj-pct">80%</div>
+              <div class="subj-bar-bg"><div class="subj-bar-fill" style="width:88%;background:#6f5ce8;"></div></div>
+              <div class="subj-pct">88%</div>
             </div>
           </div>
-          <div class="subject-item">
+          <div class="subject-item" onclick="goTo('s-fis')">
             <div class="subj-color" style="background:#3b82f6;"></div>
             <div class="subj-info">
               <div class="subj-name">Física</div>
@@ -133,7 +133,7 @@
               <div class="subj-pct">45%</div>
             </div>
           </div>
-          <div class="subject-item">
+          <div class="subject-item" onclick="goTo('s-bio')">
             <div class="subj-color" style="background:#00dfa2;"></div>
             <div class="subj-info">
               <div class="subj-name">Biologia</div>
@@ -144,22 +144,388 @@
               <div class="subj-pct">25%</div>
             </div>
           </div>
-          <div class="subject-item">
+          <div class="subject-item" onclick="goTo('s-qui')">
             <div class="subj-color" style="background:#ffc93c;"></div>
             <div class="subj-info">
               <div class="subj-name">Química</div>
               <div class="subj-meta">0 resumos · não iniciado</div>
             </div>
             <div class="subj-progress-wrap">
-              <div class="subj-bar-bg"><div class="subj-bar-fill" style="width:0%;background:#ffc93c;"></div></div>
-              <div class="subj-pct">0%</div>
+              <div class="subj-bar-bg"><div class="subj-bar-fill" style="width:8%;background:#ffc93c;"></div></div>
+              <div class="subj-pct">8%</div>
             </div>
           </div>
         </div>
 
       </div>
-      <!-- NAV inside home screen so it stays at bottom -->
+    </div><!-- /s-home -->
+
+    <!-- ── SCREEN: MATEMÁTICA ── -->
+    <div class="screen materia-screen mat-screen" id="s-mat">
+      <div class="mat-hero">
+        <div class="mat-hero-bg"></div>
+        <div class="mat-hero-content">
+          <div class="mat-back-btn" onclick="goBack()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </div>
+          <div class="mat-hero-icon">∑</div>
+          <div class="mat-hero-name">Matemática</div>
+          <div class="mat-hero-sub">Álgebra, Geometria & Cálculo</div>
+          <div class="mat-progress-ring-wrap">
+            <svg class="mat-ring" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-fill ring-mat" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="37.7"/>
+            </svg>
+            <div class="mat-ring-label">
+              <div class="ring-pct">88%</div>
+              <div class="ring-txt">concluído</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="materia-scroll">
+        <div class="mat-stats-row">
+          <div class="mat-stat"><div class="mst-val">4</div><div class="mst-lbl">Resumos</div></div>
+          <div class="mat-stat"><div class="mst-val">1h20m</div><div class="mst-lbl">Hoje</div></div>
+          <div class="mat-stat"><div class="mst-val">32</div><div class="mst-lbl">Flashcards</div></div>
+          <div class="mat-stat"><div class="mst-val">🔥7</div><div class="mst-lbl">Sequência</div></div>
+        </div>
+
+        <div class="mat-sec-label">Tópicos</div>
+        <div class="topico-list">
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(111,92,232,0.15);color:#8f7fff;">π</div>
+              <div><div class="topico-name">Geometria Plana</div><div class="topico-meta">12 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:100%;background:linear-gradient(90deg,#6f5ce8,#8f7fff);"></div></div>
+              <div class="topico-pct" style="color:#8f7fff;">100%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(111,92,232,0.15);color:#8f7fff;">∫</div>
+              <div><div class="topico-name">Funções Quadráticas</div><div class="topico-meta">8 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:88%;background:linear-gradient(90deg,#6f5ce8,#8f7fff);"></div></div>
+              <div class="topico-pct" style="color:#8f7fff;">88%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(111,92,232,0.15);color:#8f7fff;">△</div>
+              <div><div class="topico-name">Trigonometria</div><div class="topico-meta">10 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:75%;background:linear-gradient(90deg,#6f5ce8,#8f7fff);"></div></div>
+              <div class="topico-pct" style="color:#8f7fff;">75%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(111,92,232,0.15);color:#8f7fff;">n!</div>
+              <div><div class="topico-name">Análise Combinatória</div><div class="topico-meta">6 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:50%;background:linear-gradient(90deg,#6f5ce8,#8f7fff);"></div></div>
+              <div class="topico-pct" style="color:#8f7fff;">50%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mat-sec-label">Últimas atividades</div>
+        <div class="atividade-list">
+          <div class="atividade-item">
+            <div class="atv-dot" style="background:#6f5ce8;"></div>
+            <div class="atv-info"><div class="atv-name">Resumo: Teorema de Pitágoras</div><div class="atv-time">há 2h · Câmera IA</div></div>
+            <div class="atv-badge" style="background:rgba(111,92,232,0.15);color:#8f7fff;">✓</div>
+          </div>
+          <div class="atividade-item">
+            <div class="atv-dot" style="background:#8f7fff;"></div>
+            <div class="atv-info"><div class="atv-name">Flashcards: Funções</div><div class="atv-time">há 4h · 20/20 acertos</div></div>
+            <div class="atv-badge" style="background:rgba(111,92,232,0.15);color:#8f7fff;">⚡</div>
+          </div>
+          <div class="atividade-item">
+            <div class="atv-dot" style="background:#4a3db8;"></div>
+            <div class="atv-info"><div class="atv-name">Exercícios: Geometria</div><div class="atv-time">ontem · 12 questões</div></div>
+            <div class="atv-badge" style="background:rgba(111,92,232,0.15);color:#8f7fff;">📝</div>
+          </div>
+        </div>
+        <div style="height:16px;"></div>
+      </div>
     </div>
+
+    <!-- ── SCREEN: FÍSICA ── -->
+    <div class="screen materia-screen fis-screen" id="s-fis">
+      <div class="mat-hero fis-hero">
+        <div class="mat-hero-bg fis-hero-bg"></div>
+        <div class="mat-hero-content">
+          <div class="mat-back-btn" onclick="goBack()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </div>
+          <div class="mat-hero-icon" style="color:#60a5fa;border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.1);">⚛</div>
+          <div class="mat-hero-name">Física</div>
+          <div class="mat-hero-sub">Mecânica, Óptica & Termodinâmica</div>
+          <div class="mat-progress-ring-wrap">
+            <svg class="mat-ring" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-fill ring-fis" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="172.7"/>
+            </svg>
+            <div class="mat-ring-label">
+              <div class="ring-pct" style="color:#60a5fa;">45%</div>
+              <div class="ring-txt">concluído</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="materia-scroll">
+        <div class="mat-stats-row">
+          <div class="mat-stat"><div class="mst-val" style="color:#60a5fa;">2</div><div class="mst-lbl">Resumos</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#60a5fa;">1h10m</div><div class="mst-lbl">Hoje</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#60a5fa;">14</div><div class="mst-lbl">Flashcards</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#60a5fa;">🔥4</div><div class="mst-lbl">Sequência</div></div>
+        </div>
+
+        <div class="mat-sec-label">Tópicos</div>
+        <div class="topico-list">
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(59,130,246,0.12);color:#60a5fa;">F</div>
+              <div><div class="topico-name">Leis de Newton</div><div class="topico-meta">10 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:90%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div></div>
+              <div class="topico-pct" style="color:#60a5fa;">90%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(59,130,246,0.12);color:#60a5fa;">⚡</div>
+              <div><div class="topico-name">Eletromagnetismo</div><div class="topico-meta">8 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:40%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div></div>
+              <div class="topico-pct" style="color:#60a5fa;">40%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(59,130,246,0.12);color:#60a5fa;">🌡</div>
+              <div><div class="topico-name">Termodinâmica</div><div class="topico-meta">6 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:20%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div></div>
+              <div class="topico-pct" style="color:#60a5fa;">20%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(59,130,246,0.12);color:#60a5fa;">〜</div>
+              <div><div class="topico-name">Ondulatória</div><div class="topico-meta">5 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:0%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div></div>
+              <div class="topico-pct" style="color:#505070;">0%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mat-sec-label">Últimas atividades</div>
+        <div class="atividade-list">
+          <div class="atividade-item">
+            <div class="atv-dot" style="background:#3b82f6;"></div>
+            <div class="atv-info"><div class="atv-name">Resumo: Leis de Newton</div><div class="atv-time">há 1h · Câmera IA</div></div>
+            <div class="atv-badge" style="background:rgba(59,130,246,0.12);color:#60a5fa;">✓</div>
+          </div>
+          <div class="atividade-item">
+            <div class="atv-dot" style="background:#60a5fa;"></div>
+            <div class="atv-info"><div class="atv-name">Flashcards: Cinemática</div><div class="atv-time">ontem · 8/14 acertos</div></div>
+            <div class="atv-badge" style="background:rgba(59,130,246,0.12);color:#60a5fa;">⚡</div>
+          </div>
+        </div>
+        <div style="height:16px;"></div>
+      </div>
+    </div>
+
+    <!-- ── SCREEN: BIOLOGIA ── -->
+    <div class="screen materia-screen bio-screen" id="s-bio">
+      <div class="mat-hero bio-hero">
+        <div class="mat-hero-bg bio-hero-bg"></div>
+        <div class="mat-hero-content">
+          <div class="mat-back-btn" onclick="goBack()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </div>
+          <div class="mat-hero-icon" style="color:#00dfa2;border-color:rgba(0,223,162,0.3);background:rgba(0,223,162,0.08);">🧬</div>
+          <div class="mat-hero-name">Biologia</div>
+          <div class="mat-hero-sub">Célula, Genética & Ecologia</div>
+          <div class="mat-progress-ring-wrap">
+            <svg class="mat-ring" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-fill ring-bio" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="235.5"/>
+            </svg>
+            <div class="mat-ring-label">
+              <div class="ring-pct" style="color:#00dfa2;">25%</div>
+              <div class="ring-txt">concluído</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="materia-scroll">
+        <div class="mat-stats-row">
+          <div class="mat-stat"><div class="mst-val" style="color:#00dfa2;">1</div><div class="mst-lbl">Resumos</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#00dfa2;">30min</div><div class="mst-lbl">Hoje</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#00dfa2;">6</div><div class="mst-lbl">Flashcards</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#00dfa2;">🔥2</div><div class="mst-lbl">Sequência</div></div>
+        </div>
+
+        <div class="mat-sec-label">Tópicos</div>
+        <div class="topico-list">
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(0,223,162,0.1);color:#00dfa2;">🔬</div>
+              <div><div class="topico-name">Citologia</div><div class="topico-meta">8 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:60%;background:linear-gradient(90deg,#00c48c,#00dfa2);"></div></div>
+              <div class="topico-pct" style="color:#00dfa2;">60%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(0,223,162,0.1);color:#00dfa2;">🧬</div>
+              <div><div class="topico-name">Genética</div><div class="topico-meta">10 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:15%;background:linear-gradient(90deg,#00c48c,#00dfa2);"></div></div>
+              <div class="topico-pct" style="color:#00dfa2;">15%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(0,223,162,0.1);color:#00dfa2;">🌿</div>
+              <div><div class="topico-name">Ecologia</div><div class="topico-meta">7 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:0%;background:linear-gradient(90deg,#00c48c,#00dfa2);"></div></div>
+              <div class="topico-pct" style="color:#505070;">0%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(0,223,162,0.1);color:#00dfa2;">🦠</div>
+              <div><div class="topico-name">Microbiologia</div><div class="topico-meta">6 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:0%;background:linear-gradient(90deg,#00c48c,#00dfa2);"></div></div>
+              <div class="topico-pct" style="color:#505070;">0%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mat-sec-label">Últimas atividades</div>
+        <div class="atividade-list">
+          <div class="atividade-item">
+            <div class="atv-dot" style="background:#00dfa2;"></div>
+            <div class="atv-info"><div class="atv-name">Resumo: Divisão Celular</div><div class="atv-time">há 30min · Câmera IA</div></div>
+            <div class="atv-badge" style="background:rgba(0,223,162,0.1);color:#00dfa2;">✓</div>
+          </div>
+        </div>
+        <div class="bio-dica-card">
+          <div class="bio-dica-icon">💡</div>
+          <div class="bio-dica-text">Você está começando! Tente escanear mais 2 conteúdos hoje para ganhar sua sequência.</div>
+        </div>
+        <div style="height:16px;"></div>
+      </div>
+    </div>
+
+    <!-- ── SCREEN: QUÍMICA ── -->
+    <div class="screen materia-screen qui-screen" id="s-qui">
+      <div class="mat-hero qui-hero">
+        <div class="mat-hero-bg qui-hero-bg"></div>
+        <div class="mat-hero-content">
+          <div class="mat-back-btn" onclick="goBack()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </div>
+          <div class="mat-hero-icon" style="color:#ffc93c;border-color:rgba(255,201,60,0.3);background:rgba(255,201,60,0.08);">⚗</div>
+          <div class="mat-hero-name">Química</div>
+          <div class="mat-hero-sub">Orgânica, Inorgânica & Físico-Química</div>
+          <div class="mat-progress-ring-wrap">
+            <svg class="mat-ring" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-fill ring-qui" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="288.9"/>
+            </svg>
+            <div class="mat-ring-label">
+              <div class="ring-pct" style="color:#ffc93c;">8%</div>
+              <div class="ring-txt">concluído</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="materia-scroll">
+        <div class="mat-stats-row">
+          <div class="mat-stat"><div class="mst-val" style="color:#ffc93c;">0</div><div class="mst-lbl">Resumos</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#ffc93c;">—</div><div class="mst-lbl">Hoje</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#ffc93c;">2</div><div class="mst-lbl">Flashcards</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:#505070;">0</div><div class="mst-lbl">Sequência</div></div>
+        </div>
+
+        <div class="qui-start-card">
+          <div class="qui-start-icon">🚀</div>
+          <div class="qui-start-title">Comece agora!</div>
+          <div class="qui-start-desc">Fotografe um quadro ou caderno de Química para gerar seu primeiro resumo com IA.</div>
+          <div class="qui-start-btn" onclick="goTo('s-cam')">📷 Escanear conteúdo</div>
+        </div>
+
+        <div class="mat-sec-label">Tópicos</div>
+        <div class="topico-list">
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(255,201,60,0.1);color:#ffc93c;">🧪</div>
+              <div><div class="topico-name">Tabela Periódica</div><div class="topico-meta">8 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:20%;background:linear-gradient(90deg,#e6a800,#ffc93c);"></div></div>
+              <div class="topico-pct" style="color:#ffc93c;">20%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(255,201,60,0.1);color:#ffc93c;">⚗</div>
+              <div><div class="topico-name">Ligações Químicas</div><div class="topico-meta">10 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:0%;"></div></div>
+              <div class="topico-pct" style="color:#505070;">0%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(255,201,60,0.1);color:#ffc93c;">🔥</div>
+              <div><div class="topico-name">Reações Químicas</div><div class="topico-meta">12 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:0%;"></div></div>
+              <div class="topico-pct" style="color:#505070;">0%</div>
+            </div>
+          </div>
+          <div class="topico-item">
+            <div class="topico-left">
+              <div class="topico-icon" style="background:rgba(255,201,60,0.1);color:#ffc93c;">🧴</div>
+              <div><div class="topico-name">Química Orgânica</div><div class="topico-meta">9 exercícios</div></div>
+            </div>
+            <div class="topico-right">
+              <div class="topico-bar-wrap"><div class="topico-bar" style="width:0%;"></div></div>
+              <div class="topico-pct" style="color:#505070;">0%</div>
+            </div>
+          </div>
+        </div>
+        <div style="height:16px;"></div>
+      </div>
+    </div>
+
+
 
     <!-- ── SCREEN 2: CÂMERA ── -->
     <div class="screen cam-screen" id="s-cam">
@@ -440,10 +806,10 @@
               <div class="cr-info"><div class="cr-name">Gerar flashcards</div><div class="cr-desc">Junto com o resumo</div></div>
               <div class="cr-right"><div class="toggle" style="width:46px;height:26px;" onclick="toggleCR(this)"><div class="toggle-ball" style="width:20px;height:20px;"></div></div></div>
             </div>
-            <div class="config-row">
+            <div class="config-row" onclick="openLangModal()" style="cursor:pointer;">
               <div class="config-row-icon" style="background:rgba(0,223,162,0.12);">🌐</div>
-              <div class="cr-info"><div class="cr-name">Idioma do resumo</div><div class="cr-desc">Português Brasileiro</div></div>
-              <div class="cr-right"><div class="cr-val">PT-BR</div><div class="cr-arrow">›</div></div>
+              <div class="cr-info"><div class="cr-name">Idioma do resumo</div><div class="cr-desc" id="lang-desc">Português Brasileiro</div></div>
+              <div class="cr-right"><div class="cr-val" id="lang-val">PT-BR</div><div class="cr-arrow">›</div></div>
             </div>
           </div>
         </div>
@@ -468,7 +834,133 @@
       </div>
     </div>
 
+    <!-- ── SCREEN: VER TODAS MATÉRIAS ── -->
+    <div class="screen" id="s-materias">
+      <div class="config-header" style="display:flex;align-items:center;gap:12px;">
+        <div class="mat-back-btn" onclick="goBack()" style="margin-bottom:0;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </div>
+        <div>
+          <div class="config-title">Minhas Matérias</div>
+          <div class="config-sub">Todas as disciplinas</div>
+        </div>
+      </div>
+      <div class="materias-all-scroll">
+
+        <!-- Matemática -->
+        <div class="matall-card" onclick="goTo('s-mat')">
+          <div class="matall-left">
+            <div class="matall-icon" style="background:rgba(111,92,232,0.15);color:#8f7fff;border-color:rgba(111,92,232,0.25);">∑</div>
+            <div class="matall-info">
+              <div class="matall-name">Matemática</div>
+              <div class="matall-meta">4 resumos · 1h 20min hoje</div>
+              <div class="matall-tags">
+                <span class="matall-tag" style="background:rgba(111,92,232,0.12);color:#8f7fff;">Álgebra</span>
+                <span class="matall-tag" style="background:rgba(111,92,232,0.12);color:#8f7fff;">Geometria</span>
+                <span class="matall-tag" style="background:rgba(111,92,232,0.12);color:#8f7fff;">Cálculo</span>
+              </div>
+            </div>
+          </div>
+          <div class="matall-right">
+            <div class="matall-pct" style="color:#8f7fff;">88%</div>
+            <div class="matall-bar-bg"><div class="matall-bar-fill" style="width:88%;background:linear-gradient(90deg,#6f5ce8,#8f7fff);"></div></div>
+            <div class="matall-arrow">›</div>
+          </div>
+        </div>
+
+        <!-- Física -->
+        <div class="matall-card" onclick="goTo('s-fis')">
+          <div class="matall-left">
+            <div class="matall-icon" style="background:rgba(59,130,246,0.12);color:#60a5fa;border-color:rgba(59,130,246,0.25);">⚛</div>
+            <div class="matall-info">
+              <div class="matall-name">Física</div>
+              <div class="matall-meta">2 resumos · 1h 10min hoje</div>
+              <div class="matall-tags">
+                <span class="matall-tag" style="background:rgba(59,130,246,0.12);color:#60a5fa;">Mecânica</span>
+                <span class="matall-tag" style="background:rgba(59,130,246,0.12);color:#60a5fa;">Óptica</span>
+                <span class="matall-tag" style="background:rgba(59,130,246,0.12);color:#60a5fa;">Termodinâmica</span>
+              </div>
+            </div>
+          </div>
+          <div class="matall-right">
+            <div class="matall-pct" style="color:#60a5fa;">45%</div>
+            <div class="matall-bar-bg"><div class="matall-bar-fill" style="width:45%;background:linear-gradient(90deg,#3b82f6,#60a5fa);"></div></div>
+            <div class="matall-arrow">›</div>
+          </div>
+        </div>
+
+        <!-- Biologia -->
+        <div class="matall-card" onclick="goTo('s-bio')">
+          <div class="matall-left">
+            <div class="matall-icon" style="background:rgba(0,223,162,0.1);color:#00dfa2;border-color:rgba(0,223,162,0.25);">🧬</div>
+            <div class="matall-info">
+              <div class="matall-name">Biologia</div>
+              <div class="matall-meta">1 resumo · 30min hoje</div>
+              <div class="matall-tags">
+                <span class="matall-tag" style="background:rgba(0,223,162,0.1);color:#00dfa2;">Célula</span>
+                <span class="matall-tag" style="background:rgba(0,223,162,0.1);color:#00dfa2;">Genética</span>
+                <span class="matall-tag" style="background:rgba(0,223,162,0.1);color:#00dfa2;">Ecologia</span>
+              </div>
+            </div>
+          </div>
+          <div class="matall-right">
+            <div class="matall-pct" style="color:#00dfa2;">25%</div>
+            <div class="matall-bar-bg"><div class="matall-bar-fill" style="width:25%;background:linear-gradient(90deg,#00c48c,#00dfa2);"></div></div>
+            <div class="matall-arrow">›</div>
+          </div>
+        </div>
+
+        <!-- Química -->
+        <div class="matall-card" onclick="goTo('s-qui')">
+          <div class="matall-left">
+            <div class="matall-icon" style="background:rgba(255,201,60,0.1);color:#ffc93c;border-color:rgba(255,201,60,0.25);">⚗</div>
+            <div class="matall-info">
+              <div class="matall-name">Química</div>
+              <div class="matall-meta">0 resumos · não iniciado</div>
+              <div class="matall-tags">
+                <span class="matall-tag" style="background:rgba(255,201,60,0.1);color:#ffc93c;">Orgânica</span>
+                <span class="matall-tag" style="background:rgba(255,201,60,0.1);color:#ffc93c;">Inorgânica</span>
+                <span class="matall-tag" style="background:rgba(255,201,60,0.1);color:#ffc93c;">Físico-Química</span>
+              </div>
+            </div>
+          </div>
+          <div class="matall-right">
+            <div class="matall-pct" style="color:#ffc93c;">8%</div>
+            <div class="matall-bar-bg"><div class="matall-bar-fill" style="width:8%;background:linear-gradient(90deg,#e6a800,#ffc93c);"></div></div>
+            <div class="matall-arrow">›</div>
+          </div>
+        </div>
+
+        <div class="matall-summary">
+          <div class="matall-sum-item"><div class="mas-val">7</div><div class="mas-lbl">Resumos totais</div></div>
+          <div class="matall-sum-item"><div class="mas-val">54</div><div class="mas-lbl">Flashcards</div></div>
+          <div class="matall-sum-item"><div class="mas-val">41%</div><div class="mas-lbl">Média geral</div></div>
+        </div>
+
+        <div style="height:16px;"></div>
+      </div>
+    </div>
+
   </div><!-- /app -->
+
+  <!-- ── MODAL: IDIOMA DO RESUMO ── -->
+  <div class="lang-overlay" id="lang-overlay" onclick="closeLangModal()"></div>
+  <div class="lang-sheet" id="lang-sheet">
+    <div class="lang-sheet-handle"></div>
+    <div class="lang-sheet-title">Idioma do Resumo</div>
+    <div class="lang-sheet-sub">O resumo gerado pela IA será neste idioma</div>
+    <div class="lang-list" id="lang-list">
+      <div class="lang-item" data-code="PT-BR" data-name="Português Brasileiro" onclick="selectLang(this)"><div class="lang-flag">🇧🇷</div><div class="lang-info"><div class="lang-name">Português Brasileiro</div><div class="lang-code">PT-BR</div></div><div class="lang-check" id="check-PT-BR">✓</div></div>
+      <div class="lang-item" data-code="PT-PT" data-name="Português Europeu" onclick="selectLang(this)"><div class="lang-flag">🇵🇹</div><div class="lang-info"><div class="lang-name">Português Europeu</div><div class="lang-code">PT-PT</div></div><div class="lang-check" id="check-PT-PT"></div></div>
+      <div class="lang-item" data-code="EN" data-name="English" onclick="selectLang(this)"><div class="lang-flag">🇺🇸</div><div class="lang-info"><div class="lang-name">English</div><div class="lang-code">EN</div></div><div class="lang-check" id="check-EN"></div></div>
+      <div class="lang-item" data-code="ES" data-name="Español" onclick="selectLang(this)"><div class="lang-flag">🇪🇸</div><div class="lang-info"><div class="lang-name">Español</div><div class="lang-code">ES</div></div><div class="lang-check" id="check-ES"></div></div>
+      <div class="lang-item" data-code="FR" data-name="Français" onclick="selectLang(this)"><div class="lang-flag">🇫🇷</div><div class="lang-info"><div class="lang-name">Français</div><div class="lang-code">FR</div></div><div class="lang-check" id="check-FR"></div></div>
+      <div class="lang-item" data-code="DE" data-name="Deutsch" onclick="selectLang(this)"><div class="lang-flag">🇩🇪</div><div class="lang-info"><div class="lang-name">Deutsch</div><div class="lang-code">DE</div></div><div class="lang-check" id="check-DE"></div></div>
+      <div class="lang-item" data-code="IT" data-name="Italiano" onclick="selectLang(this)"><div class="lang-flag">🇮🇹</div><div class="lang-info"><div class="lang-name">Italiano</div><div class="lang-code">IT</div></div><div class="lang-check" id="check-IT"></div></div>
+      <div class="lang-item" data-code="JA" data-name="日本語" onclick="selectLang(this)"><div class="lang-flag">🇯🇵</div><div class="lang-info"><div class="lang-name">日本語</div><div class="lang-code">JA</div></div><div class="lang-check" id="check-JA"></div></div>
+    </div>
+    <div class="lang-done-btn" onclick="closeLangModal()">Confirmar</div>
+  </div>
 
   <!-- BOTTOM NAV -->
   <div class="bottom-nav">
@@ -659,6 +1151,50 @@ function toggleCR(el) {
   const ball = el.querySelector('.toggle-ball');
   ball.style.transform = el.classList.contains('on') ? 'translateX(20px)' : 'translateX(0)';
 }
+
+// ── IDIOMA DO RESUMO ──
+let selectedLang = { code: 'PT-BR', name: 'Português Brasileiro' };
+
+function openLangModal() {
+  document.getElementById('lang-overlay').classList.add('show');
+  document.getElementById('lang-sheet').classList.add('show');
+  // highlight current
+  document.querySelectorAll('.lang-item').forEach(el => {
+    const isSelected = el.dataset.code === selectedLang.code;
+    el.classList.toggle('lang-item-active', isSelected);
+    el.querySelector('.lang-check').textContent = isSelected ? '✓' : '';
+  });
+}
+
+function closeLangModal() {
+  document.getElementById('lang-overlay').classList.remove('show');
+  document.getElementById('lang-sheet').classList.remove('show');
+}
+
+function selectLang(el) {
+  // remove previous
+  document.querySelectorAll('.lang-item').forEach(i => {
+    i.classList.remove('lang-item-active');
+    i.querySelector('.lang-check').textContent = '';
+  });
+  // set new
+  el.classList.add('lang-item-active');
+  el.querySelector('.lang-check').textContent = '✓';
+  selectedLang = { code: el.dataset.code, name: el.dataset.name };
+  // update config row display immediately
+  document.getElementById('lang-val').textContent = selectedLang.code;
+  document.getElementById('lang-desc').textContent = selectedLang.name;
+  // small haptic-like flash
+  el.style.transition = 'background 0.1s';
+}
+
+// ── DYNAMIC GREETING ──
+(function() {
+  const h = new Date().getHours();
+  const greet = h < 12 ? 'Bom dia 👋' : h < 18 ? 'Boa tarde 👋' : 'Boa noite 👋';
+  const el = document.querySelector('.home-greeting');
+  if (el) el.textContent = greet;
+})();
 </script>
 
 </body>
