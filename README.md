@@ -60,6 +60,10 @@ O objetivo é representar um app de produtividade escolar com funções como:
 - **Google Fonts**
   - Outfit
   - JetBrains Mono
+ ---
+## 🌐 Link Do pages
+
+👉 https://lipex459-dev.github.io/Jovi-v70/
 
 ---
 
@@ -69,3 +73,5 @@ O objetivo é representar um app de produtividade escolar com funções como:
 📁 jovi-modo-estudo
  ├── index.html
  └── README.md
+ ---
+## 🌐 Link Do pages
