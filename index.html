@@ -34,14 +34,17 @@
     </div>
   </div>
 
-  <!-- Float Timer -->
-  <div class="float-timer" id="float-timer">● <span id="float-time">0s</span></div>
 
   <!-- Notification -->
-  <div class="notif-bar" id="notif-bar">
-    <span class="notif-icon">✨</span>
-    <span class="notif-text" id="notif-text">Modo Estudo ativado!</span>
-    <span class="notif-close" onclick="hideNotif()">✕</span>
+  <!-- Dynamic Island Notification -->
+  <div class="di-island di-hide" id="di-island">
+    <div class="di-inner" id="di-inner">
+      <div class="di-dot" id="di-dot"></div>
+      <div class="di-content" id="di-content">
+        <span class="di-icon" id="di-icon">🎓</span>
+        <span class="di-text" id="di-text">Modo Estudo ativado!</span>
+      </div>
+    </div>
   </div>
 
   <!-- APP AREA -->
@@ -817,15 +820,15 @@
         <div class="config-section">
           <div class="config-sec-label">Internet</div>
           <div class="config-group">
-            <div class="config-row">
+            <div class="config-row" onclick="navTo('s-inet','nav-inet')" style="cursor:pointer;">
               <div class="config-row-icon" style="background:rgba(255,79,106,0.12);">🚫</div>
               <div class="cr-info"><div class="cr-name">Apps bloqueados</div><div class="cr-desc">Instagram, TikTok, X e mais</div></div>
-              <div class="cr-right"><div class="cr-val">12</div><div class="cr-arrow">›</div></div>
+              <div class="cr-right"><div class="cr-val" style="color:var(--red);">12</div><div class="cr-arrow">›</div></div>
             </div>
-            <div class="config-row">
+            <div class="config-row" onclick="navTo('s-inet','nav-inet')" style="cursor:pointer;">
               <div class="config-row-icon" style="background:rgba(0,223,162,0.12);">✅</div>
               <div class="cr-info"><div class="cr-name">Sites permitidos</div><div class="cr-desc">Khan Academy, Wikipedia…</div></div>
-              <div class="cr-right"><div class="cr-val">8</div><div class="cr-arrow">›</div></div>
+              <div class="cr-right"><div class="cr-val" style="color:var(--green);">8</div><div class="cr-arrow">›</div></div>
             </div>
           </div>
         </div>
@@ -1072,13 +1075,11 @@ function toggleMode() {
   const toggle = document.getElementById('main-toggle');
   const modeText = document.getElementById('mode-text');
   const focusRing = document.getElementById('focus-ring');
-  const floatTimer = document.getElementById('float-timer');
 
   toggle.classList.toggle('on', modeOn);
   modeText.textContent = modeOn ? 'Ativado' : 'Desativado';
   modeText.classList.toggle('on', modeOn);
   focusRing.classList.toggle('on', modeOn);
-  floatTimer.classList.toggle('show', modeOn);
 
   if (modeOn) {
     modeSeconds = 0;
@@ -1092,13 +1093,11 @@ function toggleMode() {
       else if (m > 0) display = m + 'm ' + s + 's';
       else display = s + 's';
       document.getElementById('stat-time').textContent = display;
-      document.getElementById('float-time').textContent = display;
     }, 1000);
     showNotif('Modo Estudo ativado! 🎓');
   } else {
     clearInterval(modeTimer);
     document.getElementById('stat-time').textContent = '0h';
-    floatTimer.classList.remove('show');
     showNotif('Modo Estudo desativado');
   }
 }
@@ -1125,17 +1124,35 @@ function shootPhoto() {
   }, 2500);
 }
 
-// ── NOTIFICATIONS ──
+// ── DYNAMIC ISLAND NOTIFICATIONS ──
 let notifTimeout;
-function showNotif(msg) {
-  const bar = document.getElementById('notif-bar');
-  document.getElementById('notif-text').textContent = msg;
-  bar.classList.add('show');
+const diIcons = {
+  'estudo': '🎓', 'desativado': '✋', 'resumo': '✨',
+  'salvo': '💾', 'flash': '⚡', 'padr': '🔔'
+};
+function showNotif(msg, icon) {
+  const island = document.getElementById('di-island');
+  const textEl  = document.getElementById('di-text');
+  const iconEl  = document.getElementById('di-icon');
+  // pick icon automatically if not given
+  if (!icon) {
+    const key = Object.keys(diIcons).find(k => msg.toLowerCase().includes(k));
+    icon = key ? diIcons[key] : '🔔';
+  }
+  iconEl.textContent = icon;
+  textEl.textContent = msg;
+  island.classList.remove('di-hide');
+  island.classList.add('di-show');
   clearTimeout(notifTimeout);
-  notifTimeout = setTimeout(() => bar.classList.remove('show'), 3200);
+  notifTimeout = setTimeout(() => {
+    island.classList.remove('di-show');
+    island.classList.add('di-hide');
+  }, 3400);
 }
 function hideNotif() {
-  document.getElementById('notif-bar').classList.remove('show');
+  const island = document.getElementById('di-island');
+  island.classList.remove('di-show');
+  island.classList.add('di-hide');
 }
 
 // ── SLIDER ──
