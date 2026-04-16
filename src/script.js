@@ -206,3 +206,136 @@ function selectLang(el) {
   const el = document.querySelector('.home-greeting');
   if (el) el.textContent = greet;
 })();
+
+// ── TOPIC DETAILS ──
+document.body.addEventListener('click', (e) => {
+  const topicoItem = e.target.closest('.topico-item');
+  if (topicoItem) {
+    const nameEl = topicoItem.querySelector('.topico-name');
+    const iconEl = topicoItem.querySelector('.topico-icon');
+    if (nameEl && iconEl) {
+      const title = nameEl.textContent;
+      const iconStr = iconEl.textContent;
+      const colorStr = iconEl.style.color;
+      const bgStr = iconEl.style.background;
+      
+      const topicTitle = document.getElementById('topic-title');
+      const topicIcon = document.getElementById('topic-icon');
+      const topicDot = document.getElementById('topic-resumo-dot');
+      
+      if (topicTitle) topicTitle.textContent = title;
+      if (topicIcon) {
+        topicIcon.textContent = iconStr;
+        topicIcon.style.color = colorStr || 'var(--text)';
+        topicIcon.style.background = bgStr || 'rgba(255,255,255,0.05)';
+      }
+      if (topicDot) {
+        topicDot.style.background = colorStr || 'var(--accent)';
+      }
+      
+      goTo('s-topico');
+    }
+  }
+});
+
+// ── FLASHCARDS LOGIC ──
+let fcCurrent = 1;
+const fcTotal = 12;
+
+function startFlashcards() {
+  fcCurrent = 1;
+  document.getElementById('fc-progress').textContent = `Cartão ${fcCurrent} de ${fcTotal}`;
+  document.getElementById('active-flashcard').classList.remove('flipped');
+  document.getElementById('fc-q').textContent = `O que diz a 1ª Lei de Newton?`;
+  document.getElementById('fc-a').textContent = `Um corpo em repouso permanece em repouso, e em movimento permanece em movimento, a menos que uma força aja sobre ele (Inércia).`;
+  goTo('s-flashcards');
+}
+
+function flipCard() {
+  const card = document.getElementById('active-flashcard');
+  if (!card.classList.contains('flipped')) {
+    card.classList.add('flipped');
+  }
+}
+
+function nextCard(event, isCorrect) {
+  event.stopPropagation(); // prevent flip toggle
+  if (fcCurrent >= fcTotal) {
+    showNotif('Revisão concluída! 🎉');
+    goBack();
+    return;
+  }
+  
+  const card = document.getElementById('active-flashcard');
+  card.classList.remove('flipped');
+  
+  setTimeout(() => {
+    fcCurrent++;
+    document.getElementById('fc-progress').textContent = `Cartão ${fcCurrent} de ${fcTotal}`;
+    document.getElementById('fc-q').textContent = `Conceito número ${fcCurrent} para revisar?`;
+    document.getElementById('fc-a').textContent = `Aqui está a resposta detalhada gerada pela IA para o conceito ${fcCurrent}.`;
+  }, 300); // Wait for unflip
+}
+
+// ── EXAM LOGIC ──
+let exCurrent = 1;
+const exTotal = 5;
+
+function startExam() {
+  exCurrent = 1;
+  updateExamUI();
+  goTo('s-exam');
+}
+
+function updateExamUI() {
+  document.getElementById('ex-prog-text').textContent = `Questão ${exCurrent}/${exTotal}`;
+  document.getElementById('ex-prog-fill').style.width = `${(exCurrent/exTotal)*100}%`;
+  document.getElementById('ex-qnum').textContent = `Questão ${exCurrent}`;
+  document.getElementById('ex-qtext').textContent = exCurrent === 1 
+    ? `Qual é a fórmula fundamental da 2ª Lei de Newton?` 
+    : `Pergunta de múltipla escolha gerada por IA sobre o conteúdo ${exCurrent}?`;
+  
+  document.getElementById('ex-next-btn').classList.remove('show');
+  
+  const options = document.querySelectorAll('.ex-option');
+  options.forEach((opt, idx) => {
+    opt.className = 'ex-option'; // reset classes
+    opt.style.pointerEvents = 'all';
+    
+    if (exCurrent === 1) {
+      const texts = ['E = mc²', 'F = m · a', 'V = v0 + at', 'P = m · g'];
+      opt.querySelector('.ex-opt-text').textContent = texts[idx];
+      opt.onclick = () => selectOption(opt, idx === 1);
+    } else {
+      const letters = ['A','B','C','D'];
+      opt.querySelector('.ex-opt-text').textContent = `Alternativa ${letters[idx]} gerada dinamicamente.`;
+      opt.onclick = () => selectOption(opt, idx === 2); // C is correct for mock
+    }
+  });
+}
+
+function selectOption(el, isCorrect) {
+  const options = document.querySelectorAll('.ex-option');
+  options.forEach(opt => opt.style.pointerEvents = 'none'); // disable all
+  
+  if (isCorrect) {
+    el.classList.add('correct');
+  } else {
+    el.classList.add('wrong');
+    // mark correct one
+    const correctIdx = exCurrent === 1 ? 1 : 2;
+    options[correctIdx].classList.add('correct');
+  }
+  
+  document.getElementById('ex-next-btn').classList.add('show');
+}
+
+function nextQuestion() {
+  if (exCurrent >= exTotal) {
+    showNotif('Simulado concluído! 🎯');
+    goBack();
+    return;
+  }
+  exCurrent++;
+  updateExamUI();
+}

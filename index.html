@@ -944,6 +944,141 @@
       </div>
     </div>
 
+    <!-- ── SCREEN: TÓPICO DETALHE ── -->
+    <div class="screen" id="s-topico">
+      <div class="resumo-header">
+        <div class="back-btn" onclick="goBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--text2);"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </div>
+        <div class="rh-info" style="display:flex; align-items:center; gap:10px;">
+          <div id="topic-icon" class="topico-icon" style="background:rgba(255,255,255,0.05); width:36px; height:36px; border-radius:10px;"></div>
+          <div>
+            <div class="rh-title" id="topic-title">Tópico</div>
+            <div class="rh-sub">Detalhes do conteúdo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resumo-scroll">
+        <!-- Quick Stats -->
+        <div class="mat-stats-row">
+          <div class="mat-stat"><div class="mst-val" style="color:var(--text);">1</div><div class="mst-lbl">Resumos</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:var(--text);">12</div><div class="mst-lbl">Flashcards</div></div>
+          <div class="mat-stat"><div class="mst-val" style="color:var(--green);">85%</div><div class="mst-lbl">Acertos</div></div>
+        </div>
+
+        <div class="mat-sec-label">Resumos Salvos</div>
+        <div class="atividade-list">
+          <div class="atividade-item" onclick="goTo('s-resumo')" style="cursor:pointer;">
+            <div class="atv-dot" id="topic-resumo-dot" style="background:var(--accent);"></div>
+            <div class="atv-info"><div class="atv-name">Resumo Principal</div><div class="atv-time">Gerado por IA · Texto e pontos-chave</div></div>
+            <div class="atv-badge" style="background:rgba(111,92,232,0.15);color:#8f7fff;">📄</div>
+          </div>
+        </div>
+
+        <div class="mat-sec-label" style="margin-top:20px;">Prática e Revisão</div>
+        <div class="quick-row">
+          <div class="quick-card" onclick="startFlashcards()">
+            <div class="qc-icon" style="background:rgba(255,201,60,0.15); font-size:20px;">⚡</div>
+            <div class="qc-name">Flashcards</div>
+            <div class="qc-desc">12 cartões para revisar</div>
+            <div class="qc-arrow">→</div>
+          </div>
+          <div class="quick-card" onclick="startExam()">
+            <div class="qc-icon" style="background:rgba(0,223,162,0.15); font-size:20px;">📝</div>
+            <div class="qc-name">Exercícios</div>
+            <div class="qc-desc">Modo teste simulado</div>
+            <div class="qc-arrow">→</div>
+          </div>
+        </div>
+        
+        <div style="height:16px;"></div>
+      </div>
+    </div>
+
+    <!-- ── SCREEN: FLASHCARDS ── -->
+    <div class="screen flashcards-screen" id="s-flashcards">
+      <div class="fc-header">
+        <div class="back-btn" onclick="goBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--text2);"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </div>
+        <div class="fc-title-group">
+          <div class="fc-title">Revisão Rápida</div>
+          <div class="fc-sub">Flashcards · Tópico atual</div>
+        </div>
+        <div class="rh-ia-chip">IA</div>
+      </div>
+      
+      <div class="fc-container">
+        <div class="fc-progress" id="fc-progress">Cartão 1 de 12</div>
+        
+        <div class="flashcard" id="active-flashcard" onclick="flipCard()">
+          <div class="flashcard-inner" id="fc-inner">
+            <div class="fc-side fc-front">
+              <div class="fc-front-icon">🤔</div>
+              <div class="fc-front-title">Pergunta</div>
+              <div class="fc-front-text" id="fc-q">O que diz a 1ª Lei de Newton?</div>
+              <div class="fc-tap-hint">Toque para ver a resposta</div>
+            </div>
+            <div class="fc-side fc-back">
+              <div class="fc-ans-title">Resposta</div>
+              <div class="fc-ans-text" id="fc-a">Um corpo em repouso permanece em repouso, e em movimento permanece em movimento, a menos que uma força aja sobre ele (Inércia).</div>
+              <div class="fc-actions">
+                <button class="fc-btn wrong" onclick="nextCard(event, false)">Errei</button>
+                <button class="fc-btn correct" onclick="nextCard(event, true)">Acertei</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SCREEN: EXAM ── -->
+    <div class="screen" id="s-exam">
+      <div class="fc-header">
+        <div class="back-btn" onclick="goBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--text2);"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </div>
+        <div class="fc-title-group">
+          <div class="fc-title">Simulado</div>
+          <div class="fc-sub">Exercícios práticos</div>
+        </div>
+      </div>
+      
+      <div class="ex-scroll">
+        <div class="ex-progress">
+          <div class="ex-prog-text" id="ex-prog-text">Questão 1/5</div>
+          <div class="ex-prog-bar"><div class="ex-prog-fill" id="ex-prog-fill"></div></div>
+        </div>
+        
+        <div class="ex-question-card">
+          <div class="ex-qnum" id="ex-qnum">Questão 1</div>
+          <div class="ex-qtext" id="ex-qtext">Qual é a fórmula fundamental da 2ª Lei de Newton?</div>
+        </div>
+        
+        <div class="ex-options" id="ex-options">
+          <div class="ex-option" onclick="selectOption(this, false)">
+            <div class="ex-opt-letter">A</div>
+            <div class="ex-opt-text" id="ex-opt-a">E = mc²</div>
+          </div>
+          <div class="ex-option" onclick="selectOption(this, true)">
+            <div class="ex-opt-letter">B</div>
+            <div class="ex-opt-text" id="ex-opt-b">F = m · a</div>
+          </div>
+          <div class="ex-option" onclick="selectOption(this, false)">
+            <div class="ex-opt-letter">C</div>
+            <div class="ex-opt-text" id="ex-opt-c">V = v0 + at</div>
+          </div>
+          <div class="ex-option" onclick="selectOption(this, false)">
+            <div class="ex-opt-letter">D</div>
+            <div class="ex-opt-text" id="ex-opt-d">P = m · g</div>
+          </div>
+        </div>
+        
+        <button class="ex-check-btn" id="ex-next-btn" onclick="nextQuestion()">Próxima questão</button>
+      </div>
+    </div>
+
   </div><!-- /app -->
 
   <!-- ── MODAL: IDIOMA DO RESUMO ── -->
