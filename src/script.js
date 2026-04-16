@@ -238,17 +238,61 @@ document.body.addEventListener('click', (e) => {
   }
 });
 
+// ── DATA: FLASHCARDS & EXAMS ──
+const flashcardsData = [
+  { q: "O que diz a 1ª Lei de Newton (Inércia)?", a: "Um corpo em repouso permanece em repouso e em movimento permanece em movimento, a menos que uma força atue sobre ele." },
+  { q: "Qual a fórmula da 2ª Lei de Newton?", a: "Força Resultante = massa × aceleração\n(F = m · a)" },
+  { q: "O que diz a 3ª Lei de Newton (Ação e Reação)?", a: "Para toda força de ação, existe uma força de reação com a mesma intensidade, mesma direção, mas sentidos opostos." },
+  { q: "O que é Trabalho (T) na Física?", a: "É a energia transferida para um corpo por aplicar uma força ao longo de um deslocamento. T = F · d" },
+  { q: "Qual a unidade de medida padrão da Força no SI?", a: "Newton (N)" },
+  { q: "O que caracteriza um Movimento Retilíneo Uniforme (MRU)?", a: "É um movimento em linha reta onde a velocidade é sempre constante e a aceleração é zero." }
+];
+
+const examData = [
+  {
+    q: "Qual é a fórmula fundamental da 2ª Lei de Newton?",
+    opts: ["E = mc²", "F = m · a", "V = v0 + at", "P = m · g"],
+    ans: 1
+  },
+  {
+    q: "Se a força resultante de um corpo em movimento é zero, o que ocorrerá com ele?",
+    opts: ["Ele vai acelerar rapidamente", "Ele vai parar imediatamente", "Manterá sempre velocidade vetorial constante", "Aumentará o seu peso"],
+    ans: 2
+  },
+  {
+    q: "Qual é a unidade correta para medir a energia ou Trabalho no Sistema Internacional?",
+    opts: ["Watts", "Newtons", "Joules", "Metros/Segundo"],
+    ans: 2
+  },
+  {
+    q: "A força de atrito (cinético) sempre atuará em qual direção/sentido em relação ao corpo da superfície?",
+    opts: ["Na mesma direção e sentido do vetor velocidade", "Na mesma direção e sentido oposto à tendência de movimento", "Perpendicular ao movimento", "Para baixo, na direção da gravidade"],
+    ans: 1
+  },
+  {
+    q: "A inércia observada de qualquer corpo no universo está fisicamente ligada a qual destas grandezas?",
+    opts: ["Apenas à sua Velocidade", "Somente à Aceleração atual", "Ao Volume do corpo exato", "Geralmente associada à sua Massa (Inercial)"],
+    ans: 3
+  }
+];
+
 // ── FLASHCARDS LOGIC ──
 let fcCurrent = 1;
-const fcTotal = 12;
+const fcTotal = flashcardsData.length;
 
 function startFlashcards() {
   fcCurrent = 1;
+  updateFlashcardUI();
+  goTo('s-flashcards');
+}
+
+function updateFlashcardUI() {
   document.getElementById('fc-progress').textContent = `Cartão ${fcCurrent} de ${fcTotal}`;
   document.getElementById('active-flashcard').classList.remove('flipped');
-  document.getElementById('fc-q').textContent = `O que diz a 1ª Lei de Newton?`;
-  document.getElementById('fc-a').textContent = `Um corpo em repouso permanece em repouso, e em movimento permanece em movimento, a menos que uma força aja sobre ele (Inércia).`;
-  goTo('s-flashcards');
+  
+  const currentCard = flashcardsData[fcCurrent - 1];
+  document.getElementById('fc-q').textContent = currentCard.q;
+  document.getElementById('fc-a').textContent = currentCard.a;
 }
 
 function flipCard() {
@@ -261,79 +305,6 @@ function flipCard() {
 function nextCard(event, isCorrect) {
   event.stopPropagation(); // prevent flip toggle
   if (fcCurrent >= fcTotal) {
-    showNotif('Revisão concluída! 🎉');
-    goBack();
-    return;
-  }
-  
-  const card = document.getElementById('active-flashcard');
-  card.classList.remove('flipped');
-  
-  setTimeout(() => {
-    fcCurrent++;
-    document.getElementById('fc-progress').textContent = `Cartão ${fcCurrent} de ${fcTotal}`;
-    document.getElementById('fc-q').textContent = `Conceito número ${fcCurrent} para revisar?`;
-    document.getElementById('fc-a').textContent = `Aqui está a resposta detalhada gerada pela IA para o conceito ${fcCurrent}.`;
-  }, 300); // Wait for unflip
-}
-
-// ── EXAM LOGIC ──
-let exCurrent = 1;
-const exTotal = 5;
-
-function startExam() {
-  exCurrent = 1;
-  updateExamUI();
-  goTo('s-exam');
-}
-
-function updateExamUI() {
-  document.getElementById('ex-prog-text').textContent = `Questão ${exCurrent}/${exTotal}`;
-  document.getElementById('ex-prog-fill').style.width = `${(exCurrent/exTotal)*100}%`;
-  document.getElementById('ex-qnum').textContent = `Questão ${exCurrent}`;
-  document.getElementById('ex-qtext').textContent = exCurrent === 1 
-    ? `Qual é a fórmula fundamental da 2ª Lei de Newton?` 
-    : `Pergunta de múltipla escolha gerada por IA sobre o conteúdo ${exCurrent}?`;
-  
-  document.getElementById('ex-next-btn').classList.remove('show');
-  
-  const options = document.querySelectorAll('.ex-option');
-  options.forEach((opt, idx) => {
-    opt.className = 'ex-option'; // reset classes
-    opt.style.pointerEvents = 'all';
-    
-    if (exCurrent === 1) {
-      const texts = ['E = mc²', 'F = m · a', 'V = v0 + at', 'P = m · g'];
-      opt.querySelector('.ex-opt-text').textContent = texts[idx];
-      opt.onclick = () => selectOption(opt, idx === 1);
-    } else {
-      const letters = ['A','B','C','D'];
-      opt.querySelector('.ex-opt-text').textContent = `Alternativa ${letters[idx]} gerada dinamicamente.`;
-      opt.onclick = () => selectOption(opt, idx === 2); // C is correct for mock
-    }
-  });
-}
-
-function selectOption(el, isCorrect) {
-  const options = document.querySelectorAll('.ex-option');
-  options.forEach(opt => opt.style.pointerEvents = 'none'); // disable all
-  
-  if (isCorrect) {
-    el.classList.add('correct');
-  } else {
-    el.classList.add('wrong');
-    // mark correct one
-    const correctIdx = exCurrent === 1 ? 1 : 2;
-    options[correctIdx].classList.add('correct');
-  }
-  
-  document.getElementById('ex-next-btn').classList.add('show');
-}
-
-function nextQuestion() {
-  if (exCurrent >= exTotal) {
-    showNotif('Simulado concluído! 🎯');
-    goBack();
     return;
   }
   exCurrent++;

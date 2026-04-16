@@ -1079,6 +1079,32 @@
       </div>
     </div>
 
+    <!-- ── SCREEN: EXAM RESULT ── -->
+    <div class="screen" id="s-exam-result">
+      <div class="fc-header">
+        <div class="back-btn" onclick="goBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--text2);"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </div>
+        <div class="fc-title-group">
+          <div class="fc-title">Resultado</div>
+          <div class="fc-sub">Resumo do Simulado</div>
+        </div>
+      </div>
+      
+      <div class="ex-scroll" style="display:flex; flex-direction:column; align-items:center; padding: 40px 20px;">
+        <div class="res-circle" id="res-score">0/0</div>
+        <div class="res-title" id="res-title-text">Bom trabalho!</div>
+        <div class="res-sub">Abaixo está o seu desempenho em cada questão:</div>
+        
+        <div class="res-list" id="res-list" style="width: 100%; margin-top: 30px; display:flex; flex-direction:column; gap:12px;">
+          <!-- Injected via JS -->
+        </div>
+        
+        <button class="ex-check-btn show" style="margin-top: 40px;" onclick="goTo('s-topico')">Voltar para o Tópico</button>
+        <div style="height: 30px;"></div>
+      </div>
+    </div>
+
   </div><!-- /app -->
 
   <!-- ── MODAL: IDIOMA DO RESUMO ── -->
