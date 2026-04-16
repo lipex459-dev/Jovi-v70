@@ -305,8 +305,138 @@ function flipCard() {
 function nextCard(event, isCorrect) {
   event.stopPropagation(); // prevent flip toggle
   if (fcCurrent >= fcTotal) {
+    showNotif('Revisão concluída! 🎉');
+    goBack();
     return;
   }
-  exCurrent++;
+  fcCurrent++;
+  updateFlashcardUI();
+}
+
+// ── EXAM LOGIC ──
+let exCurrent = 1;
+const exTotal = examData.length;
+let exScore = 0;
+let exResults = []; 
+
+function startExam() {
+  exCurrent = 1;
+  exScore = 0;
+  exResults = [];
   updateExamUI();
+  goTo('s-exam');
+}
+
+function updateExamUI() {
+  const qData = examData[exCurrent - 1];
+  
+  document.getElementById('ex-prog-text').textContent = `Questão ${exCurrent}/${exTotal}`;
+  document.getElementById('ex-prog-fill').style.width = `${(exCurrent / exTotal) * 100}%`;
+  
+  document.getElementById('ex-qnum').textContent = `Questão ${exCurrent}`;
+  document.getElementById('ex-qtext').textContent = qData.q;
+  
+  const optionsDiv = document.getElementById('ex-options');
+  optionsDiv.innerHTML = '';
+  optionsDiv.style.pointerEvents = 'auto'; // re-enable clicking
+  
+  const letters = ['A', 'B', 'C', 'D'];
+  qData.opts.forEach((optText, index) => {
+    const isCorrect = (index === qData.ans);
+    const letter = letters[index];
+    
+    const optEl = document.createElement('div');
+    optEl.className = 'ex-option';
+    optEl.onclick = () => selectOption(optEl, isCorrect, qData.ans, index);
+    
+    optEl.innerHTML = `
+      <div class="ex-opt-letter">${letter}</div>
+      <div class="ex-opt-text">${optText}</div>
+    `;
+    
+    optionsDiv.appendChild(optEl);
+  });
+  
+  document.getElementById('ex-next-btn').classList.remove('show');
+}
+
+function selectOption(el, isCorrect, correctIdx, chosenIdx) {
+  const optionsDiv = document.getElementById('ex-options');
+  optionsDiv.style.pointerEvents = 'none'; // prevent multiple clicks
+  
+  const allOpts = optionsDiv.querySelectorAll('.ex-option');
+  
+  if (isCorrect) {
+    el.classList.add('correct');
+    exScore++;
+  } else {
+    el.classList.add('wrong');
+    allOpts[correctIdx].classList.add('correct');
+  }
+  
+  exResults.push({
+    q: examData[exCurrent - 1].q,
+    chosen: chosenIdx,
+    correct: correctIdx,
+    isCorrect: isCorrect
+  });
+  
+  const nextBtn = document.getElementById('ex-next-btn');
+  if (exCurrent === exTotal) {
+    nextBtn.textContent = 'Ver Resultado';
+  } else {
+    nextBtn.textContent = 'Próxima questão';
+  }
+  nextBtn.classList.add('show');
+}
+
+function nextQuestion() {
+  if (exCurrent >= exTotal) {
+    finishExam();
+  } else {
+    exCurrent++;
+    updateExamUI();
+  }
+}
+
+function finishExam() {
+  document.getElementById('res-score').textContent = `${exScore}/${exTotal}`;
+  
+  let pct = exScore / exTotal;
+  let titleText = 'Bom trabalho!';
+  if (pct === 1) titleText = 'Perfeito! 🏆';
+  else if (pct < 0.5) titleText = 'Continue praticando! 💪';
+  
+  document.getElementById('res-title-text').textContent = titleText;
+  
+  const resList = document.getElementById('res-list');
+  resList.innerHTML = '';
+  
+  exResults.forEach((res, i) => {
+    const itemEl = document.createElement('div');
+    itemEl.style.display = 'flex';
+    itemEl.style.gap = '10px';
+    itemEl.style.background = 'var(--surface)';
+    itemEl.style.padding = '12px';
+    itemEl.style.borderRadius = '12px';
+    itemEl.style.border = '1px solid var(--border)';
+    
+    const iconColor = res.isCorrect ? 'var(--green)' : 'var(--red)';
+    const iconMark = res.isCorrect ? '✓' : '✗';
+    const bg = res.isCorrect ? 'rgba(0,223,162,0.1)' : 'rgba(255,79,106,0.1)';
+    
+    itemEl.innerHTML = `
+      <div style="width:24px;height:24px;border-radius:6px;background:${bg};color:${iconColor};display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0;margin-top:2px;">
+        ${iconMark}
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;">Questão ${i + 1}</div>
+        <div style="font-size:11px;color:var(--text3);line-height:1.4;">${res.q}</div>
+      </div>
+    `;
+    
+    resList.appendChild(itemEl);
+  });
+  
+  goTo('s-exam-result');
 }
