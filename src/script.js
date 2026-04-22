@@ -208,6 +208,8 @@ function selectLang(el) {
 })();
 
 // ── TOPIC DETAILS ──
+let currentTopicName = '';
+
 document.body.addEventListener('click', (e) => {
   const topicoItem = e.target.closest('.topico-item');
   if (topicoItem) {
@@ -218,6 +220,8 @@ document.body.addEventListener('click', (e) => {
       const iconStr = iconEl.textContent;
       const colorStr = iconEl.style.color;
       const bgStr = iconEl.style.background;
+      
+      currentTopicName = title;
       
       const topicTitle = document.getElementById('topic-title');
       const topicIcon = document.getElementById('topic-icon');
@@ -238,50 +242,172 @@ document.body.addEventListener('click', (e) => {
   }
 });
 
-// ── DATA: FLASHCARDS & EXAMS ──
-const flashcardsData = [
-  { q: "O que diz a 1ª Lei de Newton (Inércia)?", a: "Um corpo em repouso permanece em repouso e em movimento permanece em movimento, a menos que uma força atue sobre ele." },
-  { q: "Qual a fórmula da 2ª Lei de Newton?", a: "Força Resultante = massa × aceleração\n(F = m · a)" },
-  { q: "O que diz a 3ª Lei de Newton (Ação e Reação)?", a: "Para toda força de ação, existe uma força de reação com a mesma intensidade, mesma direção, mas sentidos opostos." },
-  { q: "O que é Trabalho (T) na Física?", a: "É a energia transferida para um corpo por aplicar uma força ao longo de um deslocamento. T = F · d" },
-  { q: "Qual a unidade de medida padrão da Força no SI?", a: "Newton (N)" },
-  { q: "O que caracteriza um Movimento Retilíneo Uniforme (MRU)?", a: "É um movimento em linha reta onde a velocidade é sempre constante e a aceleração é zero." }
-];
+// ── DATA: FLASHCARDS POR TÓPICO ──
+const flashcardsByTopic = {
+  "Leis de Newton": [
+    { q: "O que diz a 1ª Lei de Newton (Inércia)?", a: "Um corpo em repouso permanece em repouso e em movimento permanece em movimento, a menos que uma força atue sobre ele." },
+    { q: "Qual a fórmula da 2ª Lei de Newton?", a: "Força Resultante = massa × aceleração\n(F = m · a)" },
+    { q: "O que diz a 3ª Lei de Newton (Ação e Reação)?", a: "Para toda força de ação, existe uma força de reação com a mesma intensidade, mesma direção, mas sentidos opostos." },
+    { q: "O que é Trabalho (T) na Física?", a: "É a energia transferida para um corpo por aplicar uma força ao longo de um deslocamento. T = F · d" },
+    { q: "Qual a unidade de medida padrão da Força no SI?", a: "Newton (N)" },
+    { q: "O que caracteriza um Movimento Retilíneo Uniforme (MRU)?", a: "É um movimento em linha reta onde a velocidade é sempre constante e a aceleração é zero." }
+  ],
+  "Eletromagnetismo": [
+    { q: "O que é um campo elétrico?", a: "É a região ao redor de uma carga elétrica onde outra carga sofre a influência de uma força elétrica." },
+    { q: "Qual a fórmula da Lei de Coulomb?", a: "F = k · (q₁ · q₂) / d²\nOnde k é a constante eletrostática, q são as cargas e d a distância." },
+    { q: "O que é um campo magnético?", a: "É a região ao redor de um ímã ou corrente elétrica onde forças magnéticas podem ser observadas." },
+    { q: "O que diz a Lei de Faraday?", a: "A variação do fluxo magnético através de uma espira gera uma força eletromotriz (fem) induzida." },
+    { q: "Qual a unidade de carga elétrica no SI?", a: "Coulomb (C)" },
+    { q: "O que é corrente elétrica?", a: "É o fluxo ordenado de cargas elétricas (geralmente elétrons) através de um condutor. Unidade: Ampère (A)." }
+  ],
+  "Termodinâmica": [
+    { q: "O que é temperatura?", a: "É a medida da agitação térmica (energia cinética média) das moléculas de um corpo." },
+    { q: "Qual a diferença entre calor e temperatura?", a: "Calor é a energia térmica em trânsito entre corpos com temperaturas diferentes. Temperatura é a medida da agitação molecular." },
+    { q: "O que diz a 1ª Lei da Termodinâmica?", a: "A energia interna de um sistema varia conforme o calor recebido e o trabalho realizado: ΔU = Q - W" },
+    { q: "O que diz a 2ª Lei da Termodinâmica?", a: "É impossível construir uma máquina térmica que converta todo calor em trabalho. A entropia de um sistema isolado tende a aumentar." },
+    { q: "O que é entropia?", a: "É a medida da desordem ou aleatoriedade de um sistema termodinâmico. Em processos naturais, a entropia tende a aumentar." },
+    { q: "Quais são as escalas termométricas mais usadas?", a: "Celsius (°C), Fahrenheit (°F) e Kelvin (K). A relação é: K = °C + 273,15" }
+  ],
+  "Ondulatória": [
+    { q: "O que é uma onda?", a: "É uma perturbação que se propaga transportando energia sem transportar matéria." },
+    { q: "Qual a diferença entre onda transversal e longitudinal?", a: "Na transversal, a vibração é perpendicular à propagação (ex.: luz). Na longitudinal, a vibração é paralela à propagação (ex.: som)." },
+    { q: "O que é frequência de uma onda?", a: "É o número de oscilações completas por segundo. Unidade: Hertz (Hz)." },
+    { q: "Qual a relação entre velocidade, frequência e comprimento de onda?", a: "v = λ · f (velocidade = comprimento de onda × frequência)" },
+    { q: "O que é o efeito Doppler?", a: "É a variação aparente da frequência de uma onda quando há movimento relativo entre a fonte emissora e o observador." },
+    { q: "O que é ressonância?", a: "Ocorre quando um corpo é submetido a vibrações na sua frequência natural, causando aumento significativo na amplitude." }
+  ]
+};
 
-const examData = [
-  {
-    q: "Qual é a fórmula fundamental da 2ª Lei de Newton?",
-    opts: ["E = mc²", "F = m · a", "V = v0 + at", "P = m · g"],
-    ans: 1
-  },
-  {
-    q: "Se a força resultante de um corpo em movimento é zero, o que ocorrerá com ele?",
-    opts: ["Ele vai acelerar rapidamente", "Ele vai parar imediatamente", "Manterá sempre velocidade vetorial constante", "Aumentará o seu peso"],
-    ans: 2
-  },
-  {
-    q: "Qual é a unidade correta para medir a energia ou Trabalho no Sistema Internacional?",
-    opts: ["Watts", "Newtons", "Joules", "Metros/Segundo"],
-    ans: 2
-  },
-  {
-    q: "A força de atrito (cinético) sempre atuará em qual direção/sentido em relação ao corpo da superfície?",
-    opts: ["Na mesma direção e sentido do vetor velocidade", "Na mesma direção e sentido oposto à tendência de movimento", "Perpendicular ao movimento", "Para baixo, na direção da gravidade"],
-    ans: 1
-  },
-  {
-    q: "A inércia observada de qualquer corpo no universo está fisicamente ligada a qual destas grandezas?",
-    opts: ["Apenas à sua Velocidade", "Somente à Aceleração atual", "Ao Volume do corpo exato", "Geralmente associada à sua Massa (Inercial)"],
-    ans: 3
-  }
-];
+// ── DATA: EXAMES POR TÓPICO ──
+const examsByTopic = {
+  "Leis de Newton": [
+    {
+      q: "Qual é a fórmula fundamental da 2ª Lei de Newton?",
+      opts: ["E = mc²", "F = m · a", "V = v0 + at", "P = m · g"],
+      ans: 1
+    },
+    {
+      q: "Se a força resultante sobre um corpo é zero, o que acontece com ele?",
+      opts: ["Ele acelera rapidamente", "Ele para imediatamente", "Mantém velocidade constante (MRU)", "Aumenta de peso"],
+      ans: 2
+    },
+    {
+      q: "A 3ª Lei de Newton (Ação e Reação) afirma que as forças de ação e reação:",
+      opts: ["Atuam no mesmo corpo", "Têm intensidades diferentes", "Atuam em corpos diferentes e sentidos opostos", "Se anulam mutuamente"],
+      ans: 2
+    },
+    {
+      q: "A inércia de um corpo está diretamente ligada a qual grandeza?",
+      opts: ["Velocidade", "Aceleração", "Volume", "Massa"],
+      ans: 3
+    },
+    {
+      q: "Qual a unidade de Força no Sistema Internacional (SI)?",
+      opts: ["Joule (J)", "Newton (N)", "Watt (W)", "Pascal (Pa)"],
+      ans: 1
+    }
+  ],
+  "Eletromagnetismo": [
+    {
+      q: "Qual a fórmula da Lei de Coulomb para a força entre duas cargas?",
+      opts: ["F = m · a", "F = k · q₁q₂ / d²", "F = q · v · B", "F = μ₀ · I / 2πr"],
+      ans: 1
+    },
+    {
+      q: "Qual é a unidade de carga elétrica no Sistema Internacional?",
+      opts: ["Volt (V)", "Ampère (A)", "Coulomb (C)", "Ohm (Ω)"],
+      ans: 2
+    },
+    {
+      q: "A Lei de Faraday trata sobre qual fenômeno?",
+      opts: ["Atração entre cargas", "Indução eletromagnética", "Resistência elétrica", "Pressão nos fluidos"],
+      ans: 1
+    },
+    {
+      q: "O que acontece quando um condutor percorrido por corrente é colocado em um campo magnético?",
+      opts: ["Nada, ele permanece parado", "Surge uma força magnética sobre o condutor", "A corrente para de fluir", "O campo magnético desaparece"],
+      ans: 1
+    },
+    {
+      q: "Qual dos itens NÃO é um exemplo de onda eletromagnética?",
+      opts: ["Luz visível", "Raios X", "Ondas de rádio", "Som"],
+      ans: 3
+    }
+  ],
+  "Termodinâmica": [
+    {
+      q: "A 1ª Lei da Termodinâmica é essencialmente uma aplicação de qual princípio?",
+      opts: ["Conservação da quantidade de movimento", "Conservação da energia", "Ação e Reação", "Princípio de Arquimedes"],
+      ans: 1
+    },
+    {
+      q: "Qual a fórmula da 1ª Lei da Termodinâmica?",
+      opts: ["ΔU = Q - W", "F = m · a", "E = mc²", "P · V = n · R · T"],
+      ans: 0
+    },
+    {
+      q: "A 2ª Lei da Termodinâmica afirma que em processos naturais, a entropia:",
+      opts: ["Sempre diminui", "Permanece constante", "Tende a aumentar", "É sempre zero"],
+      ans: 2
+    },
+    {
+      q: "Qual é o zero absoluto na escala Kelvin?",
+      opts: ["0 K (≈ -273,15 °C)", "100 K", "273 K", "-100 K"],
+      ans: 0
+    },
+    {
+      q: "Uma máquina térmica ideal (Carnot) tem rendimento de 100%?",
+      opts: ["Sim, sempre que bem projetada", "Não, é impossível pela 2ª Lei", "Sim, desde que use gás ideal", "Depende da temperatura ambiente"],
+      ans: 1
+    }
+  ],
+  "Ondulatória": [
+    {
+      q: "Qual a relação correta entre velocidade (v), frequência (f) e comprimento de onda (λ)?",
+      opts: ["v = λ / f", "v = λ · f", "v = f / λ", "v = λ + f"],
+      ans: 1
+    },
+    {
+      q: "O som é um exemplo de qual tipo de onda?",
+      opts: ["Transversal", "Eletromagnética", "Longitudinal", "Estacionária"],
+      ans: 2
+    },
+    {
+      q: "O efeito Doppler descreve a variação de qual característica da onda?",
+      opts: ["Amplitude", "Velocidade de propagação", "Frequência percebida pelo observador", "Comprimento do meio"],
+      ans: 2
+    },
+    {
+      q: "O que acontece na ressonância?",
+      opts: ["A onda desaparece completamente", "A amplitude aumenta muito ao igualar a frequência natural", "A frequência diminui pela metade", "A onda muda de longitudinal para transversal"],
+      ans: 1
+    },
+    {
+      q: "Ondas eletromagnéticas podem se propagar no vácuo?",
+      opts: ["Não, precisam de um meio material", "Sim, não precisam de meio material", "Apenas ondas de rádio podem", "Apenas a luz visível pode"],
+      ans: 1
+    }
+  ]
+};
+
+// Variáveis de compatibilidade (usada pelo estado atual)
+let flashcardsData = flashcardsByTopic["Leis de Newton"];
+let examData = examsByTopic["Leis de Newton"];
 
 // ── FLASHCARDS LOGIC ──
 let fcCurrent = 1;
-const fcTotal = flashcardsData.length;
+let fcTotal = flashcardsData.length;
 
 function startFlashcards() {
+  // Carrega flashcards do tópico atual
+  if (currentTopicName && flashcardsByTopic[currentTopicName]) {
+    flashcardsData = flashcardsByTopic[currentTopicName];
+  }
+  fcTotal = flashcardsData.length;
   fcCurrent = 1;
+  // Atualiza subtítulo com nome do tópico
+  const fcSub = document.getElementById('fc-topic-sub');
+  if (fcSub) fcSub.textContent = `Flashcards · ${currentTopicName || 'Tópico atual'}`;
   updateFlashcardUI();
   goTo('s-flashcards');
 }
@@ -315,14 +441,22 @@ function nextCard(event, isCorrect) {
 
 // ── EXAM LOGIC ──
 let exCurrent = 1;
-const exTotal = examData.length;
+let exTotal = examData.length;
 let exScore = 0;
 let exResults = []; 
 
 function startExam() {
+  // Carrega exame do tópico atual
+  if (currentTopicName && examsByTopic[currentTopicName]) {
+    examData = examsByTopic[currentTopicName];
+  }
+  exTotal = examData.length;
   exCurrent = 1;
   exScore = 0;
   exResults = [];
+  // Atualiza subtítulo com nome do tópico
+  const exSub = document.getElementById('ex-topic-sub');
+  if (exSub) exSub.textContent = `Simulado · ${currentTopicName || 'Exercícios práticos'}`;
   updateExamUI();
   goTo('s-exam');
 }
