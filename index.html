@@ -598,7 +598,7 @@
         </div>
         <div class="rh-info">
           <div class="rh-title">Resumo gerado</div>
-          <div class="rh-sub">Física · Leis de Newton · agora</div>
+          <div class="rh-sub" id="resumo-sub">Física · Leis de Newton · agora</div>
         </div>
         <div class="rh-ia-chip">IA</div>
       </div>
@@ -608,7 +608,7 @@
         <div class="photo-preview">
           <div class="photo-thumb-icon">📸</div>
           <div class="photo-info">
-            <div class="photo-name">Quadro_Fisica_001.jpg</div>
+            <div class="photo-name" id="resumo-photo-name">Quadro_Fisica_001.jpg</div>
             <div class="photo-meta">200 MP · 3.840 × 2.160px · hoje</div>
           </div>
           <div class="photo-quality">✓ Alta qualidade</div>
@@ -616,7 +616,7 @@
 
         <div class="score-pill">
           <div class="sp-item">
-            <div class="sp-val" style="color:var(--green);">94%</div>
+            <div class="sp-val" style="color:var(--green);" id="resumo-precision">94%</div>
             <div class="sp-lbl">Precisão IA</div>
           </div>
           <div class="sp-item">
@@ -624,19 +624,19 @@
             <div class="sp-lbl">Tempo</div>
           </div>
           <div class="sp-item">
-            <div class="sp-val" style="color:var(--yellow);">3</div>
+            <div class="sp-val" style="color:var(--yellow);" id="resumo-concepts-count">3</div>
             <div class="sp-lbl">Conceitos</div>
           </div>
         </div>
 
         <div class="r-block purple">
           <div class="r-block-title">Conceito principal</div>
-          <div class="r-block-text">As <strong>3 Leis de Newton</strong> descrevem o movimento dos corpos e a relação entre força e aceleração. São a base da mecânica clássica e fundamentais para compreender o comportamento de objetos no espaço.</div>
+          <div class="r-block-text" id="resumo-concept">As <strong>3 Leis de Newton</strong> descrevem o movimento dos corpos e a relação entre força e aceleração. São a base da mecânica clássica e fundamentais para compreender o comportamento de objetos no espaço.</div>
         </div>
 
         <div class="r-block green">
           <div class="r-block-title">Pontos-chave</div>
-          <div class="kp-list">
+          <div class="kp-list" id="resumo-keypoints">
             <div class="kp-item">
               <div class="kp-num">1</div>
               <div class="kp-text"><em>1ª Lei (Inércia)</em> — Um corpo em repouso permanece em repouso, e em movimento permanece em movimento, a menos que uma força aja sobre ele.</div>
@@ -654,7 +654,7 @@
 
         <div class="r-block yellow">
           <div class="r-block-title">Palavras-chave</div>
-          <div class="tag-cloud">
+          <div class="tag-cloud" id="resumo-tags">
             <span class="tag purple">Inércia</span>
             <span class="tag purple">F = ma</span>
             <span class="tag green">Ação-reação</span>
@@ -666,7 +666,7 @@
         </div>
 
         <div class="resumo-actions">
-          <button class="r-btn secondary" onclick="showNotif('Resumo salvo na pasta Física!')">💾 Salvar</button>
+          <button class="r-btn secondary" onclick="showNotif('Resumo salvo! 💾')">💾 Salvar</button>
           <button class="r-btn primary" onclick="showNotif('Flashcards criados! 🎉')">⚡ Flashcards</button>
         </div>
         <div style="height:8px;"></div>
@@ -969,7 +969,7 @@
 
         <div class="mat-sec-label">Resumos Salvos</div>
         <div class="atividade-list">
-          <div class="atividade-item" onclick="goTo('s-resumo')" style="cursor:pointer;">
+          <div class="atividade-item" onclick="openResumo()" style="cursor:pointer;">
             <div class="atv-dot" id="topic-resumo-dot" style="background:var(--accent);"></div>
             <div class="atv-info"><div class="atv-name">Resumo Principal</div><div class="atv-time">Gerado por IA · Texto e pontos-chave</div></div>
             <div class="atv-badge" style="background:rgba(111,92,232,0.15);color:#8f7fff;">📄</div>
