@@ -1191,3 +1191,21 @@ function finishExam() {
   
   goTo('s-exam-result');
 }
+
+// ── THEME TOGGLE ──
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const toggleBtn = document.getElementById('theme-toggle');
+  const toggleDesc = document.getElementById('theme-desc');
+  
+  if (current === 'light') {
+    html.removeAttribute('data-theme');
+    toggleBtn.classList.remove('on');
+    if(toggleDesc) toggleDesc.textContent = 'Modo Escuro';
+  } else {
+    html.setAttribute('data-theme', 'light');
+    toggleBtn.classList.add('on');
+    if(toggleDesc) toggleDesc.textContent = 'Modo Claro';
+  }
+}
